@@ -366,6 +366,9 @@ in
         # Wait for network so lists can be downloaded
         after = [ "network-online.target" ];
         requires = [ "network-online.target" ];
+        # add sysinit-reactivation.target, so that service is automatically started on nixos-rebuild switch
+        requiredBy = [ "sysinit-reactivation.target" ];
+        before = [ "sysinit-reactivation.target" ];
         serviceConfig = {
           Type = "oneshot";
           User = cfg.user;
